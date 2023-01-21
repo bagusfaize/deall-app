@@ -1,0 +1,47 @@
+.generalTable {
+    width: 100%;
+    background-color: #fff;
+    margin: 2rem 0;
+    font-size: 0.9em;
+    border: 1px solid #cdcdcd;
+    border-bottom: none;
+    border-radius: 10px;
+}
+
+.generalTable thead tr {
+    text-align: left;
+    white-space: nowrap;
+}
+
+.generalTable th {
+    padding: 1rem;
+    border-bottom: 1px solid #dddddd; 
+}
+
+.generalTable td {
+    padding: 0.75em 1rem;
+    border-bottom: 1px solid #dddddd; 
+}
+
+.generalTable tbody tr {
+    margin: 1rem 0;
+    text-transform: capitalize;
+    font-size: 0.85rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+  }
+
+  .emptyState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+    font-size: 0.8rem;
+  }
+
+  .emptyState svg {
+    margin-right: 0.5rem;
+  }
