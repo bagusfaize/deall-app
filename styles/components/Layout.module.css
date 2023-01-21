@@ -1,0 +1,25 @@
+.content {
+  display: flex;
+}
+
+.container {
+  /* width: 100%; */
+  /* height: 100vh; */
+  padding: 3rem 2rem;
+}
+
+/* @media (min-width: 768px) {
+    .container {
+      padding: 1rem 1rem;
+    }
+  }
+@media (min-width: 992px) {
+  .container {
+    padding: 1rem 3rem;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    padding: 1rem 3rem;
+  }
+} */
