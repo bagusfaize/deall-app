@@ -22,7 +22,10 @@
 }
 
 .content {
+    display: flex;
+    flex-wrap: wrap;
     padding: 0.5rem 1rem;
+    align-items: center;
 }
 
 .filterCheckbox {
@@ -44,7 +47,12 @@
     display: inline-block;
 }
 
+.showMore {
+    display: inline-flex;
+}
+
 .showMore button {
+    padding: 0.5rem 0.9rem;
     display: flex;
     align-items: center;
 }

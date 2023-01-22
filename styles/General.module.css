@@ -3,12 +3,12 @@
 }
 
 .filterFlex {
-  flex: 0 0 auto;
+  width: 30vw;
   margin-right: 2rem;
 }
 
 .productFlex {
-  flex: 1 1 auto;
+  width: 70vw;
 }
 
 .mainTitle {
@@ -32,6 +32,12 @@
   background: #fff;
   padding: 0.5rem 1rem;
   border-radius: 7px;
+}
+
+.filterToggle.filterActive {
+  color: #6c5ce7;
+  background: #f2f1ff;
+  border: 1px solid #6c5ce7;
 }
 
 .filterToggle:hover {
@@ -197,4 +203,40 @@
   padding: 1rem 0;
   border-top: 1px solid #cdcdcd;
 
+}
+
+.toggleProductView {
+  display: flex;
+  margin: 0 1rem;
+}
+.toggleProductView .toggle {
+  display: flex;
+} 
+
+.toggleProductView label {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #cdcdcd;
+  color: #8c8f98;
+}
+
+.toggleProductView .first {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.toggleProductView .last {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.toggleProductView input[type="radio"] {
+  display: none;
+}
+
+.toggleProductView input[type="radio"]:checked+label {
+  color: #6c5ce7;
+  background: #f2f1ff;
+  border: 1px solid #6c5ce7;
 }
