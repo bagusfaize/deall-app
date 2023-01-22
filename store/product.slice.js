@@ -6,7 +6,8 @@ const initialState = {
     total: 0,
     categories: [],
     filter: {},
-    showFilter: true
+    showFilter: true,
+    isTableView: false
 };
 
 const filterData = (data, query) => {
@@ -52,6 +53,10 @@ const productSlice = createSlice({
         toggleShowFilter: (state, action) => {
             state.showFilter = action.payload
         }
+        ,
+        toggleChangeView: (state, action) => {
+            state.isTableView = action.payload
+        }
     }
 });
 
@@ -61,5 +66,6 @@ export const {
     setProducts,
     setCategories,
     updateFilter,
-    toggleShowFilter
+    toggleShowFilter,
+    toggleChangeView
 } = productSlice.actions
