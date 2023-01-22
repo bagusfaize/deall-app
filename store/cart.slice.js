@@ -23,7 +23,6 @@ const cartSlice = createSlice({
         removeFromCart: (state, action) => {
             const currentCart = JSON.parse(JSON.stringify(state.cart));
             const tempCart = currentCart.filter(item => item.id !== action.payload.id);
-            console.log('clg temp', action.payload.id, tempCart);
             state.cart = tempCart;
             state.totalPrice = state.cart.reduce((prev, curr) => prev + curr.price, 0)
             state.totalQty = state.cart.reduce((prev, curr) => prev + curr.quantity, 0)

@@ -50,14 +50,14 @@ export default function Table({ columns, data, limit = 10, total }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {dataDisplayed.map(item =>
-                    (
-                        <tr key={`td-${item}`}>
+                    {dataDisplayed.map(item => {
+                    return (
+                        <tr key={`tr-${item[0]}`}>
                             {item.map(value => (
-                                <td key={`td-${value}`}>{value}</td>
+                                <td key={`td-${item[0]}`}>{value}</td>
                             ))}
                         </tr>
-                    ))
+                    )})
                     }
                 </tbody>
             </table>

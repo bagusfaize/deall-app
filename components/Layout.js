@@ -6,6 +6,10 @@ export default function Layout(props) {
   return (
     <div className={styles.main}>
         <Navigation />
+        <div className={styles.brand}>
+          <span className={styles.logo}>D</span>
+          <span>DeallCommurz</span>
+        </div>
         <div className={styles.container}>
           {children}
         </div>

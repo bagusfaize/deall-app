@@ -2,13 +2,14 @@
   display: flex;
 }
 
-.filterFlex {
-  width: 30vw;
-  margin-right: 2rem;
+.productContainer {
+  display: flex;
+  flex-direction: column;
 }
 
-.productFlex {
-  width: 70vw;
+.filterFlex, .productFlex {
+  width: 100%;
+  overflow-x: auto;
 }
 
 .mainTitle {
@@ -19,7 +20,11 @@
 
 .toolkit {
   display: flex;
-  align-items: center;
+  flex-direction: column-reverse;
+}
+
+.actionGroup {
+  display: flex;
   justify-content: space-between;
 }
 
@@ -49,9 +54,9 @@
 }
 
 .searchBar {
-  margin-left: 2rem;
+  margin: 2rem 0;
   position: relative;
-  width: 30%;
+  width: 100%;
 }
 
 .searchBar input {
@@ -137,14 +142,38 @@
 
 .cartSection {
   display: flex;
+  flex-direction: column;
 }
 
 .cartFlex {
-  flex: 1 1 auto;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.productDetail {
+  display: flex;
+}
+
+.productDetail .product {
+  margin-left: 1rem;
+  width: 90px;
+}
+
+.productDetail .product .name {
+  font-weight: 600;
+}
+
+.productDetail .product .desc {
+  height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #8c8f98;
+  font-size: 0.8rem;
 }
 
 .summaryFlex {
-  flex: 0 0 auto;
+  width: 100%;
 }
 
 .summary {
@@ -152,7 +181,7 @@
   background: #fff;
   border-radius: 10px;
   border: 1px solid #cdcdcd;
-  margin-left: 2rem;
+  width: 100%;
   margin-top: 2rem;
 }
 
@@ -171,7 +200,8 @@
   font-size: 0.8rem;
 }
 
-.summary .item, .summary .grandTotal  {
+.summary .item,
+.summary .grandTotal {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
@@ -207,11 +237,12 @@
 
 .toggleProductView {
   display: flex;
-  margin: 0 1rem;
+  margin-left: 1rem;
 }
+
 .toggleProductView .toggle {
   display: flex;
-} 
+}
 
 .toggleProductView label {
   padding: 0.5rem 1rem;
@@ -239,4 +270,54 @@
   color: #6c5ce7;
   background: #f2f1ff;
   border: 1px solid #6c5ce7;
+}
+
+@media (min-width: 768px) {
+  .brand {
+    display: none;
+  }
+  .productContainer {
+    flex-direction: row;
+  }
+  .toolkit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .searchBar {
+    /* margin: 2rem 0; */
+    margin-left: 2rem;
+    position: relative;
+    width: 30%;
+  }
+  .filterFlex {
+    width: 30%;
+    margin-right: 2rem;
+  }
+  .productFlex {
+    width: 70%;
+  }
+  .cartSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .cartFlex {
+   width: 70%;
+ }
+  .summaryFlex {
+   width: 30%;
+ }
+  .productDetail .product {
+    margin-left: 1rem;
+    width: 230px;
+  }
+  .summary {
+    width: auto;
+   margin-left: 2rem;
+   }
+   .fullWidth {
+    width: 100%;
+  }
 }

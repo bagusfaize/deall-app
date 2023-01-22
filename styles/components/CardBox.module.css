@@ -6,12 +6,12 @@
     grid-gap: 20px;
 }
 
-
 .cardBox {
     display: flex;
     background: #fff;
     border-radius: 10px;
     padding: 1rem;
+    justify-content: space-between;
     flex-direction: column;
     border: 1px solid #cdcdcd;
     width: 180px;
@@ -84,4 +84,14 @@
 .pagination {
     display: flex;
     justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .cardView {
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 180px);
+        justify-content: space-between;
+        grid-gap: 20px;
+    }
 }

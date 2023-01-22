@@ -7,6 +7,7 @@ import { TbDiscount2 } from 'react-icons/tb';
 import Head from 'next/head';
 import { removeFromCart } from '@/store/cart.slice';
 import { RiDeleteBinLine } from 'react-icons/ri'
+import Image from 'next/image';
 
 export default function Cart() {
   const cartState = useSelector(state => state.cart);
@@ -73,16 +74,28 @@ export default function Cart() {
     dispatch(removeFromCart(item))
   }
 
+  const generateProductDetail = (data) => {
+    return(
+      <div className={styles.productDetail}>
+        <div>
+          <Image src={data.images[0]} height={50} width={50} alt={data.title} />
+        </div>
+        <div className={styles.product}>
+          <div className={styles.name}>{data.title}</div>
+          <div className={styles.desc}>{data.description}</div>
+        </div>
+      </div>
+    )
+  }
+
   const generateTable = () => {
-    const columns = [{width:'30%', title:'Product Name'}, {width:'20%', title:'Brand'}, 'Price', 'Category', 'Quantity',] 
+    const columns = [{width:'30%', title:'Product'}, 'Qty','Price', {width:'10%', title:''}] 
     const data = cart.map(item => {
       const removeBtn = <button onClick={()=>onRemoveFromCart(item)} className={styles.removeFromCart} key='addCart'><RiDeleteBinLine/></button>
       return [
-        item.title,
-        item.brand,
-        `$${item.price}`,
-        item.category,
+        generateProductDetail(item),
         item.quantity,
+        item.price,
         removeBtn
     ];
     }) || [];

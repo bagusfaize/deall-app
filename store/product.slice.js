@@ -1,5 +1,6 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
+
 const initialState = {
     products: [],
     filteredProduct: [],
@@ -7,7 +8,7 @@ const initialState = {
     categories: [],
     filter: {},
     showFilter: true,
-    isTableView: false
+    isTableView: false,
 };
 
 const filterData = (data, query) => {
@@ -45,7 +46,6 @@ const productSlice = createSlice({
                 }
                 return true;
             })
-            console.log('clg filter', filter);
             state.filter = filter;
             state.filteredProduct = filteredProduct;
             state.total = filteredProduct.length

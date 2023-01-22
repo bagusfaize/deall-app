@@ -16,6 +16,8 @@ import Head from "next/head";
 import { cleanObject } from "@/utils/cleanObject";
 import { BiTable } from 'react-icons/bi'
 import CardBox from "@/components/CardBox";
+import { isMobile } from "react-device-detect";
+import Image from "next/image";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -27,12 +29,13 @@ export default function Home() {
   const cart = useSelector(state => state.cart.cart)
   const isTableView = useSelector(state => state.product.isTableView);
   const displayedData = !isEmpty(filter) ? filteredProduct : allProducts;
-
-  console.log('clg cart', cart);
   
   const [searchInput, setSearchInput] = useState('')
-  
+
   useEffect(() => {
+
+    if (isMobile) toggleFilter()
+
     const getAllProduct = () => {
       const params = {limit: 100};
       const apiUrl ='https://dummyjson.com/products'
@@ -66,15 +69,28 @@ export default function Home() {
     dispatch(addToCart(item));
   }
 
+  const generateProductDetail = (data) => {
+    return(
+      <div className={styles.productDetail}>
+        <div>
+          <Image src={data.images[0]} height={50} width={50} alt={data.title} />
+        </div>
+        <div className={styles.product}>
+          <div className={styles.name}>{data.title}</div>
+          <div className={styles.desc}>{data.description}</div>
+        </div>
+      </div>
+    )
+  }
+
   const generateProductTable = () => {
-    const columns = [{width:'30%', title:'Product Name'}, {width:'20%', title:'Brand'}, 'Price', 'Stock', 'Category', 'Action'];
+    const columns = ['Product Name',{width:'10%', title:'Price'}, {width:'10%', title:'Stock'}, {width:'20%', title:'Category'}, {width:'10%', title:'Action'}];
     
     const data = displayedData.map(item => {
       const isAdded = cart.find(data => data.id === item.id) ? true : false;
       const addToCartBtn = <button onClick={()=>handleAddToCart(item)} disabled={isAdded} className={styles.addToCart} key='addCart'>{isAdded ? 'Added' : 'Add'}</button>;
       return [
-        item.title,
-        item.brand,
+        generateProductDetail(item),
         `$${item.price}`,
         item.stock,
         item.category,
@@ -131,17 +147,17 @@ export default function Home() {
       </Head>
       <div className={styles.mainTitle}>All Products</div>
       <div className={styles.toolkit}>
-        <div className={styles.displayFlex}>
+        <div className={styles.actionGroup}>
           <div onClick={toggleFilter} className={` ${styles.filterToggle} ${showFilter ? styles.filterActive : ''}`}>
             <HiAdjustmentsHorizontal/>Filter
           </div>
           <div className={styles.toggleProductView}>
             <div className={styles.toggle}>
-              <input type='radio' id='cardView' name="productToggle" checked={!isTableView}/>
+              <input type='radio' id='cardView' name="productToggle" checked={!isTableView} onChange={toggleView}/>
               <label onClick={toggleView} htmlFor='cardView' className={styles.first}><BiGridAlt/></label>
             </div>
             <div className={styles.toggle}>
-              <input type='radio' id='tableView' name="productToggle" checked={isTableView}/>
+              <input type='radio' id='tableView' name="productToggle" checked={isTableView} onChange={toggleView}/>
               <label onClick={toggleView} htmlFor='tableView' className={styles.last}><BiTable/></label>
             </div>
           </div>
@@ -160,13 +176,13 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className={styles.displayFlex}>
+      <div className={styles.productContainer}>
         {showFilter &&
           <div className={styles.filterFlex}>
             <Filter />
           </div>
         }
-        <div className={styles.productFlex}>
+        <div className={`${styles.productFlex} ${!showFilter ? styles.fullWidth : '' }`}>
           { isTableView ? generateProductTable() : generateCardView()}
         </div>
       </div>
