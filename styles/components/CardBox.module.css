@@ -1,7 +1,7 @@
 .cardView {
     margin-top: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 180px);
+    grid-template-columns: repeat(auto-fill, 165px);
     justify-content: space-between;
     grid-gap: 20px;
 }
@@ -14,7 +14,7 @@
     justify-content: space-between;
     flex-direction: column;
     border: 1px solid #cdcdcd;
-    width: 180px;
+    width: 160px;
     margin-bottom: 1rem;
 }
 
@@ -93,5 +93,8 @@
         grid-template-columns: repeat(auto-fill, 180px);
         justify-content: space-between;
         grid-gap: 20px;
+    }
+    .cardBox {
+        width: 180px;
     }
 }
