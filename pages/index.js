@@ -34,7 +34,7 @@ export default function Home() {
 
   useEffect(() => {
 
-    if (isMobile) toggleFilter()
+    if (isMobile) dispatch(toggleShowFilter(false))
 
     const getAllProduct = () => {
       const params = {limit: 100};
