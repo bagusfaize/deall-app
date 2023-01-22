@@ -1,12 +1,12 @@
 import axios from "axios"
-import { BiSearchAlt } from 'react-icons/bi';
+import { BiGridAlt, BiSearchAlt } from 'react-icons/bi';
 import { HiAdjustmentsHorizontal } from 'react-icons/hi2';
 import { MdClear } from 'react-icons/md';
 import { useState } from "react";
 import { isEmpty } from "lodash";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategories, setProducts, toggleShowFilter, updateFilter } from "@/store/product.slice";
+import { setCategories, setProducts, toggleChangeView, toggleShowFilter, updateFilter } from "@/store/product.slice";
 import { addToCart } from "@/store/cart.slice";
 import Filter from "@/components/Filter"
 import Layout from "@/components/Layout"
@@ -14,6 +14,8 @@ import styles from '@/styles/General.module.css'
 import Table from "@/components/Table";
 import Head from "next/head";
 import { cleanObject } from "@/utils/cleanObject";
+import { BiTable } from 'react-icons/bi'
+import CardBox from "@/components/CardBox";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -23,6 +25,8 @@ export default function Home() {
   const totalProduct = useSelector(state => state.product.total);
   const showFilter = useSelector(state => state.product.showFilter);
   const cart = useSelector(state => state.cart.cart)
+  const isTableView = useSelector(state => state.product.isTableView);
+  const displayedData = !isEmpty(filter) ? filteredProduct : allProducts;
 
   console.log('clg cart', cart);
   
@@ -64,11 +68,9 @@ export default function Home() {
 
   const generateProductTable = () => {
     const columns = [{width:'30%', title:'Product Name'}, {width:'20%', title:'Brand'}, 'Price', 'Stock', 'Category', 'Action'];
-    const source = !isEmpty(filter) ? filteredProduct : allProducts;
-    // console.log('clg filteredProduct', filter);
-    const data = source.map(item => {
+    
+    const data = displayedData.map(item => {
       const isAdded = cart.find(data => data.id === item.id) ? true : false;
-      console.log('clg is added', isAdded);
       const addToCartBtn = <button onClick={()=>handleAddToCart(item)} disabled={isAdded} className={styles.addToCart} key='addCart'>{isAdded ? 'Added' : 'Add'}</button>;
       return [
         item.title,
@@ -91,6 +93,15 @@ export default function Home() {
     );
   }
 
+  const generateCardView = () => {
+    return(
+      <CardBox 
+        data={displayedData}
+        total={totalProduct}
+        />
+    )
+  }
+
   const handleClearSearch = () => {
     setSearchInput('');
     let params = {...filter};
@@ -109,9 +120,9 @@ export default function Home() {
     dispatch(updateFilter(params))
   }
 
-  const toggleFilter = () => {
-    dispatch(toggleShowFilter(!showFilter));
-  }
+  const toggleFilter = () => dispatch(toggleShowFilter(!showFilter));
+
+  const toggleView = () => dispatch(toggleChangeView(!isTableView));
 
   return (
     <Layout>
@@ -120,8 +131,20 @@ export default function Home() {
       </Head>
       <div className={styles.mainTitle}>All Products</div>
       <div className={styles.toolkit}>
-        <div onClick={toggleFilter} className={styles.filterToggle}>
-          <HiAdjustmentsHorizontal/>Filter
+        <div className={styles.displayFlex}>
+          <div onClick={toggleFilter} className={` ${styles.filterToggle} ${showFilter ? styles.filterActive : ''}`}>
+            <HiAdjustmentsHorizontal/>Filter
+          </div>
+          <div className={styles.toggleProductView}>
+            <div className={styles.toggle}>
+              <input type='radio' id='cardView' name="productToggle" checked={!isTableView}/>
+              <label onClick={toggleView} htmlFor='cardView' className={styles.first}><BiGridAlt/></label>
+            </div>
+            <div className={styles.toggle}>
+              <input type='radio' id='tableView' name="productToggle" checked={isTableView}/>
+              <label onClick={toggleView} htmlFor='tableView' className={styles.last}><BiTable/></label>
+            </div>
+          </div>
         </div>
         <div className={styles.searchBar}>
           <input 
@@ -144,8 +167,7 @@ export default function Home() {
           </div>
         }
         <div className={styles.productFlex}>
-          
-          {generateProductTable()}
+          { isTableView ? generateProductTable() : generateCardView()}
         </div>
       </div>
     </Layout>
