@@ -59,7 +59,7 @@ export default function CardBox({ data, limit = 10, total }) {
                                 <div className={styles.price}>{`$${item.price}`}</div>
                                 <button onClick={() => handleAddToCart(item)} className={styles.addToCart} disabled={isAdded} key='addCart'>
                                     <FiShoppingBag />
-                                    <span>{isAdded ? 'Added to Cart' : 'Add to Cart'}</span>
+                                    <span>{isAdded ? 'Added' : 'Add to Cart'}</span>
                                 </button>
                             </div>
                         </div>

@@ -95,7 +95,7 @@ export default function Cart() {
       return [
         generateProductDetail(item),
         item.quantity,
-        item.price,
+        `$${item.price}`,
         removeBtn
     ];
     }) || [];
