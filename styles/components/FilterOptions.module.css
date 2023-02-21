@@ -9,11 +9,11 @@
 }
 
 .header:not(:first-child) {
-    border-top: 1px solid #cdcdcd;
+    border-top: 1px solid #dedede;
 }
 
 .header:not(:last-child) {
-    border-bottom: 1px solid #cdcdcd;
+    border-bottom: 1px solid #dedede;
 }
 
 .header .expand {
@@ -22,10 +22,11 @@
 }
 
 .content {
+    margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
-    padding: 0.5rem 1rem;
-    align-items: center;
+    padding: 0.5rem 0;
+    /* overflow: auto; */
 }
 
 .filterCheckbox {
@@ -34,17 +35,23 @@
 
 .filterCheckbox label,
 .showMore button {
+    white-space: nowrap;
     color: #373737;
     text-transform: capitalize;
-    border: 1px solid #cdcdcd;
+    border: 1px solid #dedede;
     font-size: 0.7rem;
     border-radius: 25px;
-    background: #f5f4f8;
+    background: #fff;
     transition: all .2s;
     padding: 0.45rem 0.9rem;
     margin: 0.3rem;
     cursor: pointer;
     display: inline-block;
+}
+
+.filterCheckbox label:hover,
+.showMore button:hover{
+    background: #ececec;
 }
 
 .showMore {
@@ -66,7 +73,7 @@
 }
 
 .filterCheckbox input[type="checkbox"]:checked+label {
-    color: #6c5ce7;
-    background: #f2f1ff;
-    border: 1px solid #6c5ce7;
+    color: #1766db;
+    background: #e0edfd;
+    border: 1px solid #1766db;
 }

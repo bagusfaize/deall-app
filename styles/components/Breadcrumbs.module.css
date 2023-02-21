@@ -1,0 +1,24 @@
+.breadcrumbsWrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 0.8rem;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+}
+
+.item .separator {
+    margin: 0 0.3rem;
+}
+
+.item:last-child .label{
+    cursor: default;
+    color: #1766db;
+}
+
+.item a:hover {
+    text-decoration: underline;
+}
