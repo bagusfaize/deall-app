@@ -365,6 +365,7 @@
   .searchBar {
     position: relative;
     width: 30%;
+    margin-bottom: 0;
   }
   .cartSection {
     display: flex;
