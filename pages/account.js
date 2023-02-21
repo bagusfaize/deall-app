@@ -1,13 +1,14 @@
 import Head from 'next/head'
 import Layout from '@/components/Layout'
 import styles from '@/styles/General.module.css'
-import {GiGears} from 'react-icons/gi'
+import {AiOutlineInfoCircle} from 'react-icons/ai'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default function Cart() {
   const generateEmptyState = () => {
     return(
       <div className={styles.emptyState}>
-        <div className={styles.icon}><GiGears/></div>
+        <div className={styles.icon}><AiOutlineInfoCircle/></div>
         <div className={styles.desc}>Coming Soon!</div>
       </div>
     )
@@ -15,9 +16,14 @@ export default function Cart() {
   return (
     <Layout>
       <Head>
-        <title>Deall | Accunt</title>
+        <title>Deall | About</title>
       </Head>
-      <div className={styles.mainTitle}>Account</div>  
+      <Breadcrumbs
+        data={[
+          {text: 'About', link:'/'}
+      ]}
+      />
+      <div className={styles.mainTitle}>About</div>  
       {generateEmptyState()}
     </Layout>
   )
