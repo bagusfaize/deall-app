@@ -1,5 +1,4 @@
-## Deall Online Test for Frontend Engineer
+## Technical Test for Frontend Engineer
 
-Demo on Vercel [https://deall-commerce.vercel.app](https://deall-commerce.vercel.app/).
+Demo on Vercel [https://deall-app.vercel.app](https://deall-app.vercel.app/).
 
-### Preview 
