@@ -8,7 +8,7 @@
 }
 
 .contentContainer {
-  padding: 2rem;
+  padding: 2rem 1.5rem;
   width: 100%;
   overflow-y: scroll;
   position: relative;
@@ -109,5 +109,11 @@
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .contentContainer {
+    padding: 2rem;
   }
 }

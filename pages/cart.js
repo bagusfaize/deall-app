@@ -46,7 +46,7 @@ export default function Cart() {
 
   const generateContent = () => {
     return (
-      <div>
+      <div className={styles.contentWrapper}>
         <div>{generateTable()}</div>
       </div>
     );
@@ -98,7 +98,7 @@ export default function Cart() {
   
   const generateToolkit = () => {
     return (
-      <div className={`${styles.toolkit} ${styles.flexEnd}`}>
+      <div className={`${styles.toolkit} ${styles.flexEnd} ${styles.alignItemsEnd}`}>
         <ShowSelect
               limit={limit}
               options={[5, 10, 15, 20]}
@@ -120,7 +120,7 @@ export default function Cart() {
           {text: 'Order', link:'/cart'}
       ]}
       />
-      <div className={styles.mainTitle}>Order Cart ({total})</div>  
+      <div className={styles.mainTitle}>Orders ({total})</div>  
       {generateToolkit()}
       {generateContent()}
     </Layout>

@@ -224,27 +224,29 @@ export default function Home() {
               options={[5, 10, 15, 20]}
               handler={onSelectLimit}
             />
-            <div className={styles.toggleProductView}>
-              <div className={styles.toggle}>
-                <input type='radio' id='cardView' name="productToggle" checked={!isTableView} onChange={toggleView} />
-                <label onClick={toggleView} htmlFor='cardView' className={styles.first}><BiGridAlt /></label>
-              </div>
-              <div className={styles.toggle}>
-                <input type='radio' id='tableView' name="productToggle" checked={isTableView} onChange={toggleView} />
-                <label onClick={toggleView} htmlFor='tableView' className={styles.last}><BiTable /></label>
-              </div>
-            </div>
-            <div className={styles.filterWrapper}>
-              <div onClick={toggleFilter} className={` ${styles.filterToggle} ${showFilter ? styles.filterActive : ''}`}>
-                <HiAdjustmentsHorizontal />
-              </div>
-              {showFilter && 
-                <div className={styles.filterBox}>
-                  <Filter 
-                    handler={onSelectFilter}
-                  />
+            <div className={styles.flex}>
+              <div className={styles.toggleProductView}>
+                <div className={styles.toggle}>
+                  <input type='radio' id='cardView' name="productToggle" checked={!isTableView} onChange={toggleView} />
+                  <label onClick={toggleView} htmlFor='cardView' className={styles.first}><BiGridAlt /></label>
                 </div>
-              }
+                <div className={styles.toggle}>
+                  <input type='radio' id='tableView' name="productToggle" checked={isTableView} onChange={toggleView} />
+                  <label onClick={toggleView} htmlFor='tableView' className={styles.last}><BiTable /></label>
+                </div>
+              </div>
+              <div className={styles.filterWrapper}>
+                <div onClick={toggleFilter} className={` ${styles.filterToggle} ${showFilter ? styles.filterActive : ''}`}>
+                  <HiAdjustmentsHorizontal />
+                </div>
+                {showFilter && 
+                  <div className={styles.filterBox}>
+                    <Filter 
+                      handler={onSelectFilter}
+                    />
+                  </div>
+                }
+              </div>
             </div>
           </div>
         </div>
@@ -276,7 +278,7 @@ export default function Home() {
       <div className={styles.mainTitle}>Products</div>
       {generateToolkit()}
       <div className={styles.productContainer}>
-        <div className={`${styles.productFlex} ${!showFilter ? styles.fullWidth : '' }`}>
+        <div className={`${styles.contentWrapper} ${!showFilter ? styles.fullWidth : '' }`}>
           { isTableView ? generateProductTable() : generateProductCard()}
         </div>
       </div>

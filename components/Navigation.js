@@ -28,7 +28,7 @@ export default function Navigation() {
                 <Link href="/cart">
                     <li className={pathname.includes('/cart') ? styles.isActive : null}>
                         <span className={styles.icon}><FiShoppingBag/></span>
-                        <span className={styles.title}>Order Cart</span>
+                        <span className={styles.title}>Orders</span>
                         { !isCartEmpty && <span className={styles.counter}>{cart.total}</span> }
                     </li>
                 </Link>

@@ -3,7 +3,6 @@
     align-items: center;
     font-size: 0.8rem;
     background: #fff;
-    margin-left: 1rem;
     position: relative;
 }
 
@@ -53,4 +52,12 @@
     cursor: pointer;
     padding: 0.5rem 1.5rem;
     border-bottom: 1px solid #dedede;
+}
+
+
+@media (min-width: 768px) {
+    .show {
+        margin-left: 1rem;
+    }
+
 }

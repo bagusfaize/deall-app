@@ -27,20 +27,28 @@
 }
 
 .mainTitle {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   font-size: 1.25rem;
   font-weight: 600;
+  display: flex;
+}
+
+.mainTitle .back {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 0.5rem;
 }
 
 .subTitle {
   border-left: 3px solid #1766db;
   padding-left: 0.5rem;
-  margin: 2rem 0 1rem;
+  margin: 1.5rem 0 1rem;
 }
 
 .toolkit {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 
 .actionGroup {
@@ -95,6 +103,7 @@
 .searchBar {
   position: relative;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 .searchBar input {
@@ -227,7 +236,7 @@
 }
 
 .summary .item span:first-child {
-  width: 100px;
+  width: 95px;
 }
 
 .summary .item span:last-child::before {content: ': ';}
@@ -314,8 +323,22 @@
 
 }
 
+.flex {
+  display: flex;
+}
+
 .flexEnd {
   justify-content: flex-end !important;
+}
+
+.alignItemsEnd {
+  align-items: flex-end;
+}
+
+.contentWrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 5rem;
 }
 
 
@@ -356,5 +379,14 @@
    }
    .fullWidth {
     width: 100%;
+  }
+  .mainTitle {
+    margin-bottom: 2.5rem;
+  }
+  .mainTitle .back {
+    display: none;
+  }
+  .subTitle {
+    margin: 2rem 0 1rem;
   }
 }

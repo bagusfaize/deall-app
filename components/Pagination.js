@@ -1,7 +1,7 @@
 import styles from '@/styles/components/Pagination.module.css'
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 
-export default function Pagination ({page, handlePage, totalData, productLength, limit}){
+export default function Pagination ({page, handlePage, totalData, limit, prevLabel, nextLabel}){
     const totalPage = Math.ceil(totalData/limit);
     const disablePrev = page === 1;
     const disableNext = page === totalPage;

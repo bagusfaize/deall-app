@@ -9,6 +9,8 @@ import { getCartDetailsDispatcher } from '../api';
 import Pagination from '@/components/Pagination';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { setIsLoading } from '@/store/general.slice';
+import { FiChevronLeft } from 'react-icons/fi';
+import Link from 'next/link';
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -113,11 +115,16 @@ export default function Cart() {
       <Breadcrumbs
         data={[
           {text: 'Order', link:'/cart'},
-          {text: `Order Detail ${cartId}`, link:''}
+          {text: `Order Details ${cartId}`, link:''}
       ]}
       />
-      <div className={styles.mainTitle}>{`Order Detail #${cartId}`}</div>  
-      <div>
+      <div className={styles.mainTitle}>
+        <div className={styles.back}>
+          <Link href='/cart'><FiChevronLeft /></Link>
+        </div>
+        {`Order Details #${cartId}`}
+      </div>  
+      <div className={styles.contentWrapper}>
         <div>{generateSummary()}</div>
         <div>{generateTable()}</div>
       </div>
