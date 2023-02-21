@@ -35,13 +35,5 @@
   }
 
   .emptyState {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 3rem;
-    font-size: 0.8rem;
+    text-align: center;
   }
-
-  .emptyState svg {
-    margin-right: 0.5rem;
-}

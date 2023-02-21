@@ -8,9 +8,9 @@ export default function Table({ columns, data }) {
 
     const generateEmptyState = () => {
         return(
-            <div className={styles.emptyState}>
-               <div>Data Not Found</div>
-            </div>
+            <tr>
+               <td colSpan={100} className={styles.emptyState}>Data Not Found</td>
+            </tr>
         )
     }
 
@@ -39,9 +39,9 @@ export default function Table({ columns, data }) {
                         </tr>
                     )})
                     }
+                    {dataNotFound && !isLoading && generateEmptyState()}
                 </tbody>
             </table>
-            {dataNotFound && !isLoading && generateEmptyState()}
         </>
     )
 }
