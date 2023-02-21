@@ -188,7 +188,7 @@ export default function Home() {
   }
 
   const debouncedChangeHandler = useMemo(
-    () => debounce(handleInputSearch, 300)
+    () => debounce(handleInputSearch, 500)
   , []);
 
   const clearSelectedCategory = () => {
