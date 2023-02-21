@@ -1,5 +1,6 @@
 .generalTable {
     width: 100%;
+    min-height: 440px;
     background-color: #fff;
     margin: 1rem 0;
     font-size: 0.9em;
@@ -21,11 +22,6 @@
 .generalTable td {
     padding: 0.75em 1rem;
     border-bottom: 1px solid #dddddd; 
-}
-
-.generalTable tbody {
-    display: block;
-    min-height: 380px;
 }
 
 .generalTable tbody tr {
