@@ -1,7 +1,7 @@
 .cardView {
     margin-top: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 165px);
+    grid-template-columns: repeat(auto-fill, 160px);
     justify-content: space-between;
     grid-gap: 20px;
 }
