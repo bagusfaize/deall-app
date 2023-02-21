@@ -173,6 +173,8 @@ export default function Home() {
   const onSelectFilter = (selected) => {
     setParams({
       ...params,
+      page: 1,
+      skip: 0,
       selectedCategory: selected
     })
     toggleFilter()
