@@ -210,15 +210,6 @@ export default function Home() {
             <BiSearchAlt />
           </div>
           <div className={styles.actionGroup}>
-            {params.selectedCategory && 
-              <div className={styles.filterBubble}>
-                {params.selectedCategory}
-                <MdClear 
-                  onClick={clearSelectedCategory}
-                  className={styles.remove}
-                />
-              </div>
-            }
             <ShowSelect
               limit={params.limit}
               options={[5, 10, 15, 20]}
@@ -250,6 +241,17 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {params.selectedCategory && 
+          <div className={styles.filterBubbleWrapper}>
+            <div className={styles.filterBubble}>
+              {params.selectedCategory}
+              <MdClear 
+                onClick={clearSelectedCategory}
+                className={styles.remove}
+              />
+            </div>
+          </div>
+        }
       </>
     );
   }

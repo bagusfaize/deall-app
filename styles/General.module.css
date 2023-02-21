@@ -83,12 +83,19 @@
   background: #ececec;
 }
 
+.filterBubbleWrapper {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .filterBubble {
   display: flex;
   align-items: center;
   text-transform: capitalize;
   color: #1766db;
   font-size: 0.8rem;
+  height: 40px;
   padding: 0.5rem 1rem;
   background: #e0edfd;
   border-radius: 7px;
