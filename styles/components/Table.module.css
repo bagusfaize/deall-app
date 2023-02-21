@@ -23,6 +23,11 @@
     border-bottom: 1px solid #dddddd; 
 }
 
+.generalTable tbody {
+    display: block;
+    min-height: 380px;
+}
+
 .generalTable tbody tr {
     margin: 1rem 0;
     font-size: 0.85rem;
