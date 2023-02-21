@@ -1,123 +1,128 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '@/components/Layout'
 import styles from '@/styles/General.module.css'
 import Table from '@/components/Table';
-import { SlSocialDropbox } from 'react-icons/sl';
-import { TbDiscount2 } from 'react-icons/tb';
 import Head from 'next/head';
-import { removeFromCart } from '@/store/cart.slice';
-import { RiDeleteBinLine } from 'react-icons/ri'
-import Image from 'next/image';
+import { setCarts } from '@/store/cart.slice';
+import { BiRightArrowAlt } from 'react-icons/bi'
+import { getCartsDispatcher } from './api';
+import ShowSelect from '@/components/ShowSelect';
+import Pagination from '@/components/Pagination';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { setIsLoading } from '@/store/general.slice';
 
 export default function Cart() {
-  const cartState = useSelector(state => state.cart);
-  const cart = cartState.cart;
-  const totalPrice = cartState.totalPrice;
-  const totalQty = cartState.totalQty;
-  const isCartEmpty = cart.length === 0;
   const dispatch = useDispatch()
+  const router = useRouter();
+  const cartState = useSelector(state => state.cart);
+  const carts = cartState.carts;
+  const total = cartState.total;
+  const [limit, setLimit] = useState(5);
+  const [skip, setSkip] = useState(0);
+  const [page, setPage] = useState(1);
 
-
-  const generateEmptyState = () => {
-    return(
-      <div className={styles.emptyState}>
-        <div className={styles.icon}><SlSocialDropbox/></div>
-        <div className={styles.desc}>Your cart is empty</div>
-      </div>
-    )
+  useEffect(() => {
+    getCarts();
+  },[limit, skip])
+  
+  const getCarts = () => {
+    dispatch(setIsLoading(true));
+    const params = {
+      limit,
+      skip,
+    };
+    getCartsDispatcher(params)
+    .then(res => {
+      const {data} = res;
+      dispatch(setCarts(data))
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => dispatch(setIsLoading(false)));
   }
 
   const generateContent = () => {
     return (
-      <div className={styles.cartSection}>
-        <div className={styles.cartFlex}>{generateTable()}</div>
-        <div className={styles.summaryFlex}>{generateSummary()}</div>
+      <div>
+        <div>{generateTable()}</div>
       </div>
     );
   }
 
-  const generateSummary = () => {
-    return(
-      <div className={styles.summary}>
-        <div className={styles.header}>Summary</div>
-        <div className={styles.body}>
-          <div className={styles.item}>
-            <span>Total items</span>
-            <span>{totalQty}</span>
-          </div>
-          <div className={styles.item}>
-            <span>Subtotal</span>
-            <span>{`$${totalPrice}`}</span>
-          </div>
-          <div className={styles.item}>
-            <span>Service</span>
-            <span className={styles.free}>Free</span>
-          </div>
-          <div className={styles.item}>
-            <span>Delivery</span>
-            <span className={styles.free}>Free</span>
-          </div>
-          <div className={styles.grandTotal}>
-            <span>Total</span>
-            <span>{`$${totalPrice}`}</span>
-          </div>
-          <div className={styles.promo}>
-            <TbDiscount2/>
-            <p>Free shipping and service fee with <b>BayarAja</b> payment method.</p>
-          </div>
-        </div>
-      </div>
-    )
+  const onClickDetail = (id) => {
+    router.push(`/cart/${id}`);
   }
 
-  const onRemoveFromCart = (item) => {
-    dispatch(removeFromCart(item))
-  }
-
-  const generateProductDetail = (data) => {
-    return(
-      <div className={styles.productDetail}>
-        <div>
-          <Image src={data.images[0]} height={50} width={50} alt={data.title} />
-        </div>
-        <div className={styles.product}>
-          <div className={styles.name}>{data.title}</div>
-          <div className={styles.desc}>{data.description}</div>
-        </div>
-      </div>
-    )
+  const handlePage = (type) => {
+    if (type === 'prev' && page > 1) {
+      setPage(page - 1)
+      if(page => 1) setSkip(skip-limit)
+    } else if (type === 'next') {
+      setPage(page + 1)
+      setSkip(skip+limit)
+    }
   }
 
   const generateTable = () => {
-    const columns = [{width:'30%', title:'Product'}, 'Qty','Price', {width:'10%', title:''}] 
-    const data = cart.map(item => {
-      const removeBtn = <button onClick={()=>onRemoveFromCart(item)} className={styles.removeFromCart} key='addCart'><RiDeleteBinLine/></button>
+    const columns = [{width:'30%', title:'User ID'}, 'Total Products','Total Quantity', 'Total Amount', {width:'10%', title:''}] 
+    const data = carts.map(item => {
+      const detailBtn = <button onClick={()=>onClickDetail(item.id)} className={styles.detailCartBtn} key='details'><span>Details</span><BiRightArrowAlt/></button>
       return [
-        generateProductDetail(item),
-        item.quantity,
-        `$${item.price}`,
-        removeBtn
+        item.userId,
+        item.totalProducts,
+        item.totalQuantity,
+        `$${item.total}`,
+        detailBtn
     ];
     }) || [];
     return (
-      <>
+      <div>
         <Table
           data={data}
           columns={columns}
-          total={cart.length}
-          limit={5}
+          total={carts.length}
+          limit={limit}
         />
-      </>
+        <Pagination
+          handlePage={handlePage}
+          page={page}
+          limit={limit}
+          totalData={total}
+        />
+      </div>
     );
   }
+  
+  const generateToolkit = () => {
+    return (
+      <div className={`${styles.toolkit} ${styles.flexEnd}`}>
+        <ShowSelect
+              limit={limit}
+              options={[5, 10, 15, 20]}
+              handler={onSelectLimit}
+            />
+      </div>
+    );
+  }
+
+  const onSelectLimit = (limit) => setLimit(limit);
 
   return (
     <Layout>
       <Head>
         <title>Deall | Cart</title>
       </Head>
-      <div className={styles.mainTitle}>My Cart</div>  
-      {isCartEmpty ? generateEmptyState() : generateContent()}
+      <Breadcrumbs
+        data={[
+          {text: 'Order', link:'/cart'}
+      ]}
+      />
+      <div className={styles.mainTitle}>Order Cart ({total})</div>  
+      {generateToolkit()}
+      {generateContent()}
     </Layout>
   )
 }

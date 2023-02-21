@@ -1,14 +1,13 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
-
 const initialState = {
     products: [],
     filteredProduct: [],
     total: 0,
     categories: [],
     filter: {},
-    showFilter: true,
-    isTableView: false,
+    showFilter: false,
+    isTableView: true,
 };
 
 const filterData = (data, query) => {
